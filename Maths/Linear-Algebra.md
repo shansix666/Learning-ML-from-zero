@@ -20,10 +20,13 @@ So there is a first definition: matrix
 
 A matrix is a rectangular array of numbers, symbols, or mathematical expressions arranged in rows and columns. The dimension of a matrix is denoted as a * b which 'a' represents the number of rows and 'b' represents the number of columns
 
+This matrix represents x:
+
 $$
 \mathbf{X} = \begin{bmatrix}
-x_0 & x_1 & \dots & x_n
-x_0' & x_1' & \dots & x_n'
-\vdots & \vdots & \ddots & \vdots
+x_0 & x_1 & \dots & x_n \\ 
+x_0' & x_1' & \dots & x_n' \\ 
+\vdots & \vdots & \ddots & \vdots \\
 x_0^{(m-1)} & x_1^{(m-1)} & \dots & x_n^{(m-1)}
+\end{bmatrix}
 $$
