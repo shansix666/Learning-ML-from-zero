@@ -27,6 +27,6 @@ $$
 x_0 & x_1 & \dots & x_n \\ 
 x_0' & x_1' & \dots & x_n' \\ 
 \vdots & \vdots & \ddots & \vdots \\
-x_0^{(m-1)} & x_1^{(m-1)} & \dots & x_n^{(m-1)}
+x_0^{(m)} & x_1^{(m)} & \dots & x_n^{(m)}
 \end{bmatrix}
 $$
