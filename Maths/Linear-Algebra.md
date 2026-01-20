@@ -13,7 +13,7 @@ We know the expression of a univariate linear function is y = θx + b, and this 
 We suppose there are m samples, each with n features, and we define:
 
 X: A matrix which is m * (n + 1) remember the bias term. 
-Y: An m * 1 column vector
+Y: An m * 1 column vector which represents the true value of labels
 θ: An (n + 1) * 1 column vecter
 
 So there is a first definition: matrix
@@ -29,4 +29,84 @@ x_0' & x_1' & \dots & x_n' \\
 \vdots & \vdots & \ddots & \vdots \\
 x_0^{(m)} & x_1^{(m)} & \dots & x_n^{(m)}
 \end{bmatrix}
+$$
+
+Then we want to know what the predicted result is (there are m results), which is the formula θ0x0 + θ1x1 + θ2x2 + …… + θnxn, in order to represent all results together, we can use the matrix multiplication: Yp = Xθ
+
+The following demonstrates matrix multiplication：
+
+$$
+\mathbf{M}_1 = \begin{bmatrix} a & b \\ 
+c & d 
+\end{bmatrix}, 
+\quad \mathbf{M}_2 = \begin{bmatrix} e & f \\ 
+g & h \end{bmatrix}
+$$
+
+$$
+\mathbf{M}_1 \times \mathbf{M}_2 = \begin{bmatrix} a & b \\ 
+c & d 
+\end{bmatrix} \times \begin{bmatrix} e & f \\
+g & h \end{bmatrix} = \begin{bmatrix}
+a \times e + b \times g & a \times f + b \times h \\
+c \times e + d \times g & c \times f + d \times h
+\end{bmatrix}
+$$
+
+We want to get an m * 1 column vector and each element in the vector is equal to the sum of the product of each feature and the corresponding θ.
+
+Next step we need to find the lowest value of Yp - Y which represent the lowest error to let the function as fit the true value as possible. The formula is: (We don't need to worry about how this formula was derived yet, we only consider about the linear algebra part)
+
+$$
+MSE = ||\mathbf{Y} - {\mathbf{Yp}}\||^2
+$$
+
+Remember, Yp equals Xθ, so the formula equals to:
+
+$$
+MSE = ||\mathbf{Y} - {\mathbf{Xθ}}\||^2
+$$
+
+||A|| means the vector norm and vector norm means the length of a vector in two-dimensional or three-dimensional space. We can also extend this to arbitrary n-dimensional vectors. It equals the square root of the sum of the squares of all elements in the vector.
+
+The square of norm equals the sum of the squares of all elements in the vector, this operation can also be called an inner product of a and a, which is (a1 * a1 + a2 * a2 …… + an * an)
+
+The inner product of a vector can also represent as 
+
+$$
+\langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{x}^T \mathbf{y}
+$$
+
+x^T means the transpose of x, which is to take the rows of x as columns and the columns as rows.
+
+So we can get this formula:
+
+$$
+MSE = ||\mathbf{Y} - {\mathbf{Xθ}}\||^2 = (\mathbf{X}\theta - \mathbf{Y})^T (\mathbf{X}\theta - \mathbf{Y})
+$$
+
+Let's expand the brackets：
+
+$$
+(\mathbf{X}\theta - \mathbf{Y})^T(\mathbf{X}\theta - \mathbf{Y}) = \theta^T \mathbf{X}^T \mathbf{X}\theta - 2\theta^T \mathbf{X}^T \mathbf{Y} + \mathbf{Y}^T \mathbf{Y}
+$$
+
+We call such a quadratic matrix form matrix:
+
+$$
+f(\mathbf{x}) = \mathbf{x}^T\mathbf{A}\mathbf{x} + \mathbf{b}^T\mathbf{x} + c
+$$
+
+A is a symmetric matrix which means A^T = A, and quadratic matrix represents a quadratic form, which is a polynomial of degree two involving multiple variables.
+
+Since A is positive semi-definite and the first term is greater than or equal to 0.
+
+When x - (A^-1)b =0, there is the lowest, let's substitute X, Y and θ into this equation.
+
+x = θ, A = (X^T)X, b = (X^T)Y
+
+So, the closed-form solution is:
+
+$$
+\theta = (\mathbf{X}^T\mathbf{X})^{-1} (\mathbf{X}^T\mathbf{Y})
 $$
