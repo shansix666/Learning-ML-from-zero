@@ -13,7 +13,9 @@ We know the expression of a univariate linear function is y = θx + b, and this 
 We suppose there are m samples, each with n features, and we define:
 
 X: A matrix which is m * (n + 1) remember the bias term. 
+
 Y: An m * 1 column vector which represents the true value of labels
+
 θ: An (n + 1) * 1 column vecter
 
 So there is a first definition: matrix
@@ -103,6 +105,8 @@ Since A is positive semi-definite and the first term is greater than or equal to
 
 When x - (A^-1)b =0, there is the lowest, let's substitute X, Y and θ into this equation.
 
+The first term is always ≥ 0 (since (X^T)X is positive semi-definite)
+
 x = θ, A = (X^T)X, b = (X^T)Y
 
 So, the closed-form solution is:
@@ -110,3 +114,46 @@ So, the closed-form solution is:
 $$
 \theta = (\mathbf{X}^T\mathbf{X})^{-1} (\mathbf{X}^T\mathbf{Y})
 $$
+
+Let's verify whether our formula is correct by comparing whether the results calculated from our formula are consistent with those obtained from sklearn (a python machine learning library)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+plt.rcParams['axes.labelsize'] = 14
+plt.rcParams['xtick.labelsize'] = 12
+plt.rcParams['ytick.labelsize'] = 12
+
+# Now we randomly generate a one-dimensional array x and its corresponding result y (where y=5x+6):
+
+x = 2*np.random.rand(100, 1)
+y = 5*x + 6 + np.random.rand(100, 1)
+
+# First, we generate a plot using the θ obtained from our formula. The blue dots represent the values of y corresponding to the array x, and the line is the result we fitted (don't forget to add bias term).
+
+x_b = np.c_[np.ones(100),x]
+theta = np.linalg.inv(x_b.T.dot(x_b)).dot((x_b.T).dot(y))
+y_b = x_b.dot(theta)
+
+plt.plot(x, y, "b.")
+plt.plot(x,y_b, '--', label="result")
+plt.legend()
+plt.show()
+
+# Then, we generate a plot using the result from sklearn
+
+from sklearn.linear_model import LinearRegression
+LR = LinearRegression()
+LR.fit(x, y)
+theta_0 = LR.intercept_
+theta_1 = LR.coef_
+y_sk = LR.predict(x)
+
+plt.plot(x, y, "b.")
+plt.plot(x,y_sk, '--', label="result")
+plt.legend()
+plt.show()
+
+```
+
+Let's verify the result:
