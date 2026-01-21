@@ -157,3 +157,7 @@ plt.show()
 ```
 
 Let's verify the result:
+
+The first one is the plot generated using our formula, and the second one is the plot generated from the results obtained by sklearn. We can see that they are basically the same, and through this verification, we can confirm that our formula is correct.
+
+<img src="../images/LA result from the formula.png" alt="LA result from the formula" width="400"> <img src="../images/LA result from sklearn.png" alt="LA result from skearn" width="400">
